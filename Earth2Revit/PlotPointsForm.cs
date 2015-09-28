@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Plot_Points {
+namespace Earth2Revit {
     public partial class PlotPointsForm : System.Windows.Forms.Form {
         private readonly Autodesk.Revit.DB.Document doc;
         public PlotPointsForm(Autodesk.Revit.DB.Document doc) {

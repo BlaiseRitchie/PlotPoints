@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 
-namespace Plot_Points {
+namespace Earth2Revit {
   class Directories {
     public static string resources;
     public static string contents;
-    public const string appName = "PlotPoints";
+    public const string appName = "Earth2Revit";
 
     static public void initialize(string revitVersion) {
       contents = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"Autodesk\Revit\Addins\" + revitVersion + @"\" + appName + @".bundle\");

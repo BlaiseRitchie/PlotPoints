@@ -1,4 +1,4 @@
-﻿namespace Plot_Points {
+﻿namespace Earth2Revit {
   partial class ExceptionForm {
     /// <summary>
     /// Required designer variable.

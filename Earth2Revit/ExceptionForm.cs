@@ -10,7 +10,7 @@ using System.Net.Mail;
 using System.Net;
 using Autodesk.Revit.UI;
 
-namespace Plot_Points {
+namespace Earth2Revit {
   public partial class ExceptionForm : Form {
     protected string report;
     protected bool sending = false;

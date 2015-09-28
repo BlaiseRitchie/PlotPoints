@@ -11,28 +11,10 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
-using System.Diagnostics;
 using System.IO;
+using System.Diagnostics;
 
-namespace Plot_Points {
-    [TransactionAttribute(TransactionMode.Manual)]
-    [RegenerationAttribute(RegenerationOption.Manual)]
-    public class PlotPoints : IExternalCommand {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements) {
-            //Get application and document objects
-            UIApplication uiApp = commandData.Application;
-            
-            Document doc = uiApp.ActiveUIDocument.Document;
-
-            var form = new PlotPointsForm(doc);
-            form.StartPosition = FormStartPosition.CenterParent;
-            form.ShowDialog(new WindowHandle(Process.GetCurrentProcess().MainWindowHandle));
-            form.Dispose();
-
-            return Result.Succeeded;
-        }
-    }
-
+namespace Earth2Revit {
     [TransactionAttribute(TransactionMode.Manual)]
     [RegenerationAttribute(RegenerationOption.Manual)]
     public class AddButton : IExternalApplication {
@@ -50,7 +32,7 @@ namespace Plot_Points {
 
             RibbonPanel ribbonPanel = application.CreateRibbonPanel("Earth2Revit");
             {
-                var pushButton = ribbonPanel.AddItem(new PushButtonData("PlotPoints", "Plot Points", Path.Combine(Directories.contents, @"PlotPoints.dll"), "Plot_Points.PlotPoints")) as PushButton;
+                var pushButton = ribbonPanel.AddItem(new PushButtonData("PlotPoints", "Plot Points", Path.Combine(Directories.contents, @"Earth2Revit.dll"), "Earth2Revit.PlotPoints")) as PushButton;
 
                 var uriImage = new Uri(Path.Combine(Directories.resources, @"plotpoints.png"));
                 var largeImage = new BitmapImage(uriImage);

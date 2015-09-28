@@ -3,12 +3,12 @@
   <AddIn Type="Application">
     <Name>Earth2Revit</Name>
     <Assembly>
-      .\PlotPoints.bundle\Contents\PlotPoints.dll
+      .\Earth2Revit.bundle\Contents\Earth2Revit.dll
     </Assembly>
     <ClientId>
       d3b749f4-f06b-442c-9278-cb09e28c76ad
     </ClientId>
-    <FullClassName>Plot_Points.AddButton</FullClassName>
+    <FullClassName>Earth2Revit.AddButton</FullClassName>
     <VendorId>ADSK</VendorId>
     <VisibilityMode>AlwaysVisible</VisibilityMode>
   </AddIn>
