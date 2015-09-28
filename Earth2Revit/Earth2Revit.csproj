@@ -55,12 +55,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionForm.Designer.cs">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlotPoints.cs" />
     <Compile Include="Directories.cs" />
     <Compile Include="ExceptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExceptionForm.Designer.cs" />
     <Compile Include="Earth2Revit.cs" />
     <Compile Include="PlotPointsForm.cs">
       <SubType>Form</SubType>
@@ -76,6 +78,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ExceptionForm.resx">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlotPointsForm.resx">
       <DependentUpon>PlotPointsForm.cs</DependentUpon>
     </EmbeddedResource>
