@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Earth2Revit</Name>
+    <Assembly>
+      .\PlotPoints.bundle\Contents\PlotPoints.dll
+    </Assembly>
+    <ClientId>
+      d3b749f4-f06b-442c-9278-cb09e28c76ad
+    </ClientId>
+    <FullClassName>Plot_Points.AddButton</FullClassName>
+    <VendorId>ADSK</VendorId>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+  </AddIn>
+</RevitAddIns>
