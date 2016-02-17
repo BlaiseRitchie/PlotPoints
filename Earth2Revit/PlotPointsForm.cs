@@ -147,22 +147,43 @@ namespace Earth2Revit {
                         startY = haversine(startY, offset);
                         start = new XYZ(startX.X, startY.Y, start.Z);
                         end = new XYZ(endX.X, endY.Y, end.Z);
-
-
-                        Line line = this.doc.Application.Create.NewLine(start, end, true);
-
-                        // Create a geometry plane in Revit application
                         XYZ origin = new XYZ(0, 0, 0);
                         XYZ normal = new XYZ(0, 0, 1);
-                        Plane geomPlane = this.doc.Application.Create.NewPlane(normal, origin);
 
-                        // Create a sketch plane in current document
-                        SketchPlane sketch = this.doc.Create.NewSketchPlane(geomPlane);
+                        var app = this.doc.Application.GetType();
+                        var createProperty = app.GetProperty("Create");
 
-                        this.doc.Create.NewModelCurve(line, sketch);
+                        if(createProperty != null) {
+                            var create = createProperty.GetGetMethod().Invoke(this.doc.Application, new object[] {});
+                            var createNewLineMethod = create.GetType().GetMethod("NewLine");
+                            var createBoundMethod = typeof(Line).GetMethod("CreateBound");
 
+                            if(createNewLineMethod != null) {
+                                // Line line = this.doc.Application.Create.NewLine(start, end, true);
+                                Line line = (Line)createNewLineMethod.Invoke(create, new object[] { start, end, true });
 
-                        //this.doc.ProjectUnit.
+                                // Create a geometry plane in Revit application
+                                Plane geomPlane = this.doc.Application.Create.NewPlane(normal, origin);
+
+                                // Create a sketch plane in current document
+                                //SketchPlane sketch = this.doc.Create.NewSketchPlane(geomPlane);
+                                var docCreate = this.doc.Create;
+                                var createNewSketchPlaneMethod = docCreate.GetType().GetMethod("NewSketchPlane", new [] { typeof(Plane) });
+                                SketchPlane sketch = (SketchPlane)createNewSketchPlaneMethod.Invoke(docCreate, new object[] { geomPlane });
+
+                                this.doc.Create.NewModelCurve(line, sketch);
+                            }
+                            else if (createBoundMethod != null) {
+                                //Line.CreateBound(start, end);
+                                Line line = (Line)createBoundMethod.Invoke(null, new object[] { start, end });
+                                Plane geomPlane = this.doc.Application.Create.NewPlane(normal, origin);
+
+                                var createNewSketchPlaneMethod = typeof(SketchPlane).GetMethod("Create", new Type[] { typeof(Autodesk.Revit.DB.Document), typeof(Plane) });
+                                //var sketch = SketchPlane.Create(this.doc, geomPlane);
+                                var sketch = (SketchPlane)createNewSketchPlaneMethod.Invoke(null, new object[] { this.doc, geomPlane });
+                                this.doc.Create.NewModelCurve(line, sketch);
+                            }
+                        }
                     }
                 }
                 trans.Commit();
